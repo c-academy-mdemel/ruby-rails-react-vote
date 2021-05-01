@@ -3,9 +3,10 @@ import SortableListWrapper from "../components/SortableList";
 import {
     Grid, Typography, Paper, TextField, Button, List,
     ListItem,
-    ListItemText
+    ListItemText, Divider
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {getData} from "../util/api";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,17 +69,20 @@ function Vote(props) {
         e.preventDefault()
         setVoterName("")
         setSortedChoices(choices)
+        let tempVotes = {}
         if (isSorted) {
-            setVotes({...votes, [voterName]: sortedChoices})
+            tempVotes = {...votes, [voterName]: sortedChoices}
         } else {
-            setVotes({...votes, [voterName]: sortedChoices.map((item, index) => ({choice: item, index}))})
+            tempVotes = {...votes, [voterName]: sortedChoices.map((item, index) => ({choice: item, index}))}
         }
+        setVotes(tempVotes)
         setIsSorted(false)
 
     }
 
-    function handleFinalSubmit() {
-
+    async function handleFinalSubmit() {
+        const data = await getData("gf")
+        console.log(data)
     }
 
     return (
@@ -93,21 +97,42 @@ function Vote(props) {
                     <Grid item style={{textAlign: "center"}}>
                         <Typography className={classes.head}>Vote</Typography>
                     </Grid>
-                    <Grid item style={{margin: 10}}>
-                        <TextField
-                            value={voterName}
-                            label="Enter Voter Name"
-                            type="text"
-                            fullWidth
-                            onChange={(e) => {
-                                setVoterName(e.target.value)
-                            }}
-                        />
+                    <Grid
+                        item
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                    >
+                        <Grid item>
+                            <Grid item style={{margin: 10}}>
+                            <TextField
+                                value={voterName}
+                                label="Enter Voter Name"
+                                type="text"
+                                disabled={Object.keys(votes).length >= voterCount}
+                                fullWidth
+                                onChange={(e) => {
+                                    setVoterName(e.target.value)
+                                }}
+                            />
+                        </Grid>
+                            <Grid item style={{margin: 10}}>
+                                <Typography className={classes.title}>Select Choice Order (Drag and Drop)</Typography>
+                                <SortableListWrapper initialItems={sortedChoices} getNewArray={getNewArray}
+                                                     setIsSorted={setIsSorted}/>
+                            </Grid>
+                        </Grid>
+
+                        <Grid item>
+                            <Grid item style={{margin: 10}}>
+                             uj
+                            </Grid>
+                        </Grid>
+
                     </Grid>
-                    <Grid item style={{margin: 10}}>
-                        <Typography className={classes.title}>Select Choice Order (Drag and Drop)</Typography>
-                        <SortableListWrapper initialItems={sortedChoices} getNewArray={getNewArray}
-                                             setIsSorted={setIsSorted}/>
+                    <Grid item style={{margin:20}}>
+                        <Divider orientation="horizontal"/>
                     </Grid>
                     <Grid item
                           container
@@ -142,6 +167,9 @@ function Vote(props) {
                             </Typography>
                         </Grid>
 
+                    </Grid>
+                    <Grid item style={{margin:20}}>
+                        <Divider orientation="horizontal"/>
                     </Grid>
                     <Grid item>
                         <div style={{display: "flex", marginTop: 20}}>
