@@ -23,7 +23,7 @@ function Materix({data}) {
                                             borderRadius: 0,
                                             borderColor: "lightgray",
                                         }}
-                                    >{col}
+                                    >{col.toString()}
                                     </TableCell>
                                 )}
                             </TableRow>

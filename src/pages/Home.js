@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
         placeItems: "center",
         placeContent: "center",
         paddingTop: 100,
+        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
     },
     paper: {
         padding: 30,

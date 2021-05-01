@@ -9,6 +9,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {getData, getDataDummy} from "../util/api";
 import MatrixWrapper from "../components/MatrixWrapper";
 import ReactLoading from 'react-loading';
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
         display: "grid",
         placeItems: "center",
         placeContent: "center",
-        paddingTop: 10,
+        paddingTop: 20,
+        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
     },
     paper: {
         padding: 30,
@@ -65,7 +67,7 @@ function Vote(props) {
     //results
     const [intermediateMatrices, setIntermediateMatrices] = useState([])
     const classes = useStyles()
-
+    const history = useHistory();
     function getNewArray(array) {
 
         setSortedChoices(array)
@@ -96,8 +98,8 @@ function Vote(props) {
         )
 
         setIntermediateMatrices(
-          //res.data.intermediates[res.data.intermediates.length-1].intermediate
-            res.data.intermediates[Object.keys(tempVotes).length].intermediate
+          res.data.intermediates[res.data.intermediates.length-1].intermediate
+            //res.data.intermediates[Object.keys(tempVotes).length].intermediate
         )
 
         setLoading(false)
@@ -106,11 +108,12 @@ function Vote(props) {
     async function handleFinalSubmit() {
         setLoading(true)
         const data = await getDataDummy("gf")
-        console.log(data)
+        localStorage.setItem("finalResult",JSON.stringify(data))
         setLoading(false)
+        history.push("/algo");
     }
 
-    console.log({intermediateMatrices})
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -203,7 +206,7 @@ function Vote(props) {
                         <Divider orientation="horizontal"/>
                     </Grid>
                     <Grid item>
-                        <div style={{display: "flex", marginTop: 20}}>
+                        <div style={{display: "flex", marginTop: 20,width:700,overflowX:"auto"}}>
                             {Object.keys(votes).map(v => {
                                 return (
                                     <List key={Math.random()}>
