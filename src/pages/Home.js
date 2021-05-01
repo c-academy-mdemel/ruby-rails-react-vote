@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
-import {Paper, Typography, Grid, TextField, Button, IconButton} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import React, { useState } from 'react';
+import { Paper, Typography, Grid, TextField, Button, IconButton } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { getData } from "../util/api";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -80,10 +82,10 @@ function Home(props) {
                     justify="center"
                     alignItems="stretch"
                 >
-                    <Grid item style={{textAlign: "center"}}>
+                    <Grid item style={{ textAlign: "center" }}>
                         <Typography className={classes.head}>Ruby Tideman With C-Academy</Typography>
                     </Grid>
-                    <Grid item style={{margin: 10}}>
+                    <Grid item style={{ margin: 10 }}>
                         <TextField
                             value={choiceCount}
                             label="Enter Number of Choices"
@@ -94,8 +96,8 @@ function Home(props) {
                             }}
                         />
                     </Grid>
-                    <Grid item style={{margin: 10}}>
-                        <form style={{display: "flex"}} onSubmit={handleChoiceAdd}>
+                    <Grid item style={{ margin: 10 }}>
+                        <form style={{ display: "flex" }} onSubmit={handleChoiceAdd}>
                             <TextField
                                 disabled={choices.length >= choiceCount}
                                 label="Enter Choice"
@@ -119,36 +121,36 @@ function Home(props) {
                     </Grid>
                     <Grid item>
                         {/*<TransferList choices={choices} />*/}
-                        <div style={{display: "block", margin: 15}}>
+                        <div style={{ display: "block", margin: 15 }}>
                             {choices.map((choice, index) => (
-                                    <Grid
-                                        container
-                                        direction="row"
-                                        justify="space-between"
-                                        alignItems="center"
-                                        className={classes.listItem}
-                                        key={index}
-                                    >
-                                        {/*<div className={classes.listItem}>*/}
-                                        <Grid item> <Typography>{choice}</Typography></Grid>
-                                        <Grid item>
-                                            <IconButton
-                                                aria-label="delete" size="small" style={{marginTop: -4, marginLeft: 8}}
-                                                id={choice} name={choice}
-                                                onClick={(e) => handleDelete(index)}
-                                            >
-                                                <DeleteIcon fontSize="small" style={{color: "red"}}/>
-                                            </IconButton>
-                                        </Grid>
-
-
-                                        {/*</div>*/}
+                                <Grid
+                                    container
+                                    direction="row"
+                                    justify="space-between"
+                                    alignItems="center"
+                                    className={classes.listItem}
+                                    key={index}
+                                >
+                                    {/*<div className={classes.listItem}>*/}
+                                    <Grid item> <Typography>{choice}</Typography></Grid>
+                                    <Grid item>
+                                        <IconButton
+                                            aria-label="delete" size="small" style={{ marginTop: -4, marginLeft: 8 }}
+                                            id={choice} name={choice}
+                                            onClick={(e) => handleDelete(index)}
+                                        >
+                                            <DeleteIcon fontSize="small" style={{ color: "red" }} />
+                                        </IconButton>
                                     </Grid>
-                                )
+
+
+                                    {/*</div>*/}
+                                </Grid>
+                            )
                             )}
                         </div>
                     </Grid>
-                    <Grid item style={{margin: 10}}>
+                    <Grid item style={{ margin: 10 }}>
                         <TextField
                             value={voterCount}
                             label="Enter Number of Voters"
@@ -160,10 +162,10 @@ function Home(props) {
                         />
                     </Grid>
                     <Grid item
-                          container
-                          direction="row"
-                          justify="space-around"
-                          alignItems="center"
+                        container
+                        direction="row"
+                        justify="space-around"
+                        alignItems="center"
                     >
                         <Grid item>
                             <Button
@@ -175,16 +177,26 @@ function Home(props) {
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Typography style={{color: "red"}}>
+                            <Typography style={{ color: "red" }}>
                                 {choices.length < choiceCount ? `Enter ${choiceCount - choices.length} more choice` : choiceCount <= 0 ? "Choice Count is not valid" : voterCount <= 0 ? "Voter Count is not valid" : ""}
                             </Typography>
                         </Grid>
 
+
                     </Grid>
+
                 </Grid>
 
 
             </Paper>
+
+            <Button
+                onClick={getData}
+                className={classes.addBtn}
+                disabled={choices.length !== choiceCount}
+            >
+                Test
+                            </Button>
         </div>
     );
 }
