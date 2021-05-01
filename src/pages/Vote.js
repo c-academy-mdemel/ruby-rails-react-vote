@@ -36,16 +36,16 @@ const useStyles = makeStyles((theme) => ({
     listHead: {
         fontSize: 15,
         fontWeight: 700,
-        paddingLeft:15
+        paddingLeft: 15
     },
-    listItem:{
+    listItem: {
         fontSize: 12,
         fontWeight: 400,
         borderStyle: "solid",
         borderWidth: 1,
         borderRadius: 5,
         borderColor: "teal",
-        padding:1
+        padding: 1
     }
 }))
 
@@ -68,12 +68,16 @@ function Vote(props) {
         e.preventDefault()
         setVoterName("")
         setSortedChoices(choices)
-        if(isSorted){
+        if (isSorted) {
             setVotes({...votes, [voterName]: sortedChoices})
-        }else{
-            setVotes({...votes, [voterName]: sortedChoices.map((item,index) => ({choice: item, index}))})
+        } else {
+            setVotes({...votes, [voterName]: sortedChoices.map((item, index) => ({choice: item, index}))})
         }
         setIsSorted(false)
+
+    }
+
+    function handleFinalSubmit() {
 
     }
 
@@ -102,7 +106,8 @@ function Vote(props) {
                     </Grid>
                     <Grid item style={{margin: 10}}>
                         <Typography className={classes.title}>Select Choice Order (Drag and Drop)</Typography>
-                        <SortableListWrapper initialItems={sortedChoices} getNewArray={getNewArray} setIsSorted={setIsSorted}/>
+                        <SortableListWrapper initialItems={sortedChoices} getNewArray={getNewArray}
+                                             setIsSorted={setIsSorted}/>
                     </Grid>
                     <Grid item
                           container
@@ -111,13 +116,20 @@ function Vote(props) {
                           alignItems="center"
                     >
                         <Grid item>
-                            <Button
-                                onClick={handleSubmit}
-                                className={classes.addBtn}
-                                disabled={voterName === ""}
-                            >
-                                Submit
-                            </Button>
+                            {Object.keys(votes).length < voterCount ?
+                                <Button
+                                    onClick={handleSubmit}
+                                    className={classes.addBtn}
+                                    disabled={voterName === ""}
+                                >
+                                    Submit
+                                </Button> :
+                                <Button
+                                    onClick={handleFinalSubmit}
+                                    className={classes.addBtn}
+                                >
+                                    Go to Results
+                                </Button>}
                         </Grid>
                         {Object.keys(votes).length < voterCount && <Grid item>
                             <Typography style={{color: "red"}}>
@@ -126,16 +138,16 @@ function Vote(props) {
                         </Grid>}
                         <Grid item>
                             <Typography style={{color: "red"}}>
-                                {Object.keys(votes).length < voterCount?  `${voterCount-Object.keys(votes).length} Votes Remain` : "Voters Count Reached"}
+                                {Object.keys(votes).length < voterCount ? `${voterCount - Object.keys(votes).length} Votes Remain` : "Voters Count Reached"}
                             </Typography>
                         </Grid>
 
                     </Grid>
                     <Grid item>
-                        <div style={{display: "flex",marginTop:20}}>
+                        <div style={{display: "flex", marginTop: 20}}>
                             {Object.keys(votes).map(v => {
                                 return (
-                                    <List key={Math.random()} >
+                                    <List key={Math.random()}>
                                         <Typography className={classes.listHead}>{v}</Typography>
                                         {votes[v].map((choice) => (
                                             < ListItem key={choice.index}>
