@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         width: 180
     },
     arrow: {
-        width: 400,
+        width: 550,
         height: 400,
         border: '0px solid red'
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 function Arrow(props) {
     const classes = useStyles()
     const [res, setRes] = useState(JSON.parse(localStorage.getItem("finalResult")))
-
+    const [choices, setChoices] = useState(JSON.parse(localStorage.getItem("choices")))
     console.log(res);
     function initDiagram() {
         const $ = go.GraphObject.make;
@@ -72,7 +72,7 @@ function Arrow(props) {
             $(go.Node, 'Auto',  // the Shape will go around the TextBlock
                 new go.Binding('location', 'loc', go.Point.parse).makeTwoWay(go.Point.stringify),
                 $(go.Shape, 'RoundedRectangle',
-                    { name: 'SHAPE', fill: 'white', strokeWidth: 0, width: 40, height: 40, margin: 30 },
+                    { name: 'SHAPE', fill: 'white', strokeWidth: 0, width: 100, height: 40, margin: 30 },
                     // Shape.fill is bound to Node.data.color
                     new go.Binding('fill', 'color')),
                 $(go.TextBlock,
@@ -97,7 +97,7 @@ function Arrow(props) {
     function createNodeArray(lockArray) {
         let nodeArray = []
         for (let i = 0; i < lockArray.length; i++) {
-            nodeArray.push({ key: i, text: i, color: 'lightblue' },);
+            nodeArray.push({ key: i, text: choices[i] + " ("+i+")", color: 'lightblue' },);
         }
         return nodeArray;
     }
