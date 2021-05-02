@@ -118,7 +118,7 @@ function Arrow(props) {
             for (let j = 0; j < line.length; j++) {
                 const isConnected = line[j];
                 if (isConnected) {
-                    linkDataArray.push({ key: -count, from: i, to: j },);
+                    linkDataArray.push({ key: -count, from: j, to: i },);
                     count = count - 1;
                 }
 
@@ -129,14 +129,12 @@ function Arrow(props) {
     }
     console.log(createNodeArray(res.data.arrow_lock));
     return (
-        <div className={classes.root}>
-            <p>asd</p>
+        <div>
             <ReactDiagram
                 initDiagram={initDiagram}
                 divClassName={classes.arrow}
                 nodeDataArray={createNodeArray(res.data.arrow_lock)}
                 linkDataArray={createEdgeArray(res.data.arrow_lock)}
-
             />
         </div>
     );
