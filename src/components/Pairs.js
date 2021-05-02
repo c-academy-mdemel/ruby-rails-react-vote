@@ -6,6 +6,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 
 function Pairs(props) {
+    const [choices, setChoices] = useState(JSON.parse(localStorage.getItem("choices")))
     const [res, setRes] = useState(JSON.parse(localStorage.getItem("finalResult")))
     const lastMatrices = res.data.intermediates[res.data.intermediates.length - 1].intermediate
     const lastMatrix = lastMatrices[lastMatrices.length - 1]
@@ -45,7 +46,7 @@ function Pairs(props) {
                 <Materix
                     data={
                         pairs.slice(0, currentIndex + 1).map(i => (
-                                [`winner : ${i.winner}`, `looser : ${i.loser}`, `value : ${i.value}`]
+                                [`winner : ${choices[i.winner]}`, `looser : ${choices[i.loser]}`, `value : ${i.value}`]
                             )
                         )
                     }
@@ -56,6 +57,9 @@ function Pairs(props) {
             </Grid>
             <Grid item>
                 <ColorChangingMatrix data={lastMatrix} Y={pairs[currentIndex].loser} X={pairs[currentIndex].winner}/>
+            </Grid>
+            <Grid item style={{marginLeft: 20, marginRight: 20}}>
+                <ArrowForwardIcon/>
             </Grid>
         </Grid>
         </div>

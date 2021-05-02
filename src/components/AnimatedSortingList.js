@@ -1,54 +1,85 @@
 import React, {useState} from "react";
 import {useTransition, animated} from "react-spring";
+import Grid from "@material-ui/core/Grid";
+import {Button, Paper, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 
-const pairs = [{winner: 2, loser: 0, value: 2}, {
-    winner: 25,
-    loser: 0,
-    value: 2
-}, {winner:0, loser: 1, value: 2},{winner: 15, loser: 1, value: 2}]
-const sorted = [{winner: 0, loser: 0, value: 2}, {
-    winner: 2,
-    loser: 9,
-    value: 2
-}, {winner: 15, loser: 11, value: 2},{winner: 25, loser: 11, value: 2}]
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: "flex"
+    },
+    btnWrapper: {
+        display: "grid",
+        height: "100%",
+        placeContent: "center",
+        placeItems: "center",
+    },
+    btn: {
+        margin: 10,
+        backgroundColor: "teal"
+    },
+    cell: {
+        width: 100,
+        padding: 10,
+        borderStyle: "solid",
+        borderWidth: 0.5,
+        borderRadius: 0,
+        borderColor: "lightgray",
+    },
+    row: {
+        display: "flex",
+    }
+}))
 
-
-function AnimatedSortingList({sorted,notSorted}) {
+function AnimatedSortingList({sorted, notSorted}) {
+    const classes = useStyles()
     const [rows, set] = useState(notSorted);
-    const height = 20;
+    const height = 52;
     const transitions = useTransition(
-        rows.map((d, i) => ({ ...d, y: i * height })),
-        d => d.winner,
+        rows.map((d, i) => ({...d, y: i * height})),
+        d => d.id,
         {
-            from: { position: "absolute", opacity: 0 },
-            leave: { height: 0, opacity: 0 },
-            enter: ({ y }) => ({ y, opacity: 1 }),
-            update: ({ y }) => ({ y })
+            from: {position: "absolute", opacity: 0},
+            leave: {height: 0, opacity: 0},
+            enter: ({y}) => ({y, opacity: 1}),
+            update: ({y}) => ({y})
         }
     );
-    console.log(transitions)
+    // console.log({sorted, notSorted})
     return (
-        <div class="list">
-            <button onClick={() => set(sorted)}>shuffle</button>
+        <div className={classes.root}>
+            <div className={classes.btnWrapper}>
+                <Button className={classes.btn} onClick={() => set(sorted)}>Sort</Button>
+            </div>
 
-            {transitions.map(({ item, props: { y, ...rest }, key }, index) => (
-                <animated.div
-                    key={key}
-                    class="card"
-                    style={{
-                        transform: y.interpolate(y => `translate3d(0,${y}px,0)`),
-                        ...rest
-                    }}
-                >
-                    <div style={{display:"flex"}}>
-                        <div style={{margin:10}}> {item.winner} </div>
-                        <div style={{margin:10}}> {item.loser} </div>
-                        <div style={{margin:10}}> {item.value} </div>
-                    </div>
-                </animated.div>
-            ))}
+            <Paper elevation={5}>
+                {transitions.map(({item, props: {y, ...rest}, key}, index) => (
+                    <animated.div
+                        key={key}
+                        style={{
+                            transform: y.interpolate(y => `translate3d(0,${y}px,0)`),
+                            ...rest
+                        }}
+                    >
+                        <div className={classes.row}>
+                            <div className={classes.cell}>
+                                <Typography>winner : {item.winnerName}</Typography>
+                                <Typography>index : {item.winnerIndex}</Typography>
+                            </div>
+                            <div className={classes.cell}>
+                                <Typography>loser : {item.loserName}</Typography>
+                                <Typography>index : {item.loserIndex}</Typography>
+                            </div>
+                            <div className={classes.cell}>
+                                <Typography> value : {item.value}</Typography>
+                            </div>
+                        </div>
+                    </animated.div>
+                ))}
+            </Paper>
         </div>
+
     );
 }
 

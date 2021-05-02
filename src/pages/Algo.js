@@ -6,7 +6,9 @@ import ColorChangingMatrix from "../components/ColorChangingMatrix";
 import Pairs from "../components/Pairs";
 import Sorted from "../components/Sorted";
 import Arrow from "./Arrow";
-
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import Button from "@material-ui/core/Button";
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: 30,
-        width: 900,
+        width: 1100,
 
     },
     head: {
@@ -50,11 +52,16 @@ function Algo(props) {
                 >
                     <Grid item style={{textAlign: "center"}}>
                         <Typography className={classes.head}>Final Result</Typography>
+                        <Button
+                            onClick={()=>{window.location.reload(false);}}
+                            startIcon={<PlayArrowIcon/>}
+                        >Replay</Button>
                     </Grid>
 
                     <Grid item container
                           direction="row"
-                          justify="space-around"
+                          justify="flex-start"
+                          spacing={2}
                           alignItems="flex-start">
                         <Grid item>
                             <Typography className={classes.title}>Pairs</Typography>

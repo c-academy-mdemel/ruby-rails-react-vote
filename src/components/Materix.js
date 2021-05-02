@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core";
 import FadeIn from 'react-fade-in';
 import ReactLoading from "react-loading";
 
 
 function Materix({data}) {
+
     return (
         data ? <FadeIn> <TableContainer component={Paper}>
                 <Table aria-label="simple table">
@@ -14,7 +15,7 @@ function Materix({data}) {
                             <TableRow key={Math.random()} style={{transition: "transform 300ms ease"}}>
                                 {row.map(col =>
                                     <TableCell
-                                        align="right"
+                                        align="left"
                                         key={Math.random()}
                                         style={{
                                             borderStyle: "solid",
