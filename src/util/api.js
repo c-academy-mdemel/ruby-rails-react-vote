@@ -51,5 +51,5 @@ export const getDataDummy = (passes) => new Promise((resolve, reject) => {
 
     console.log('in the promise definition')
 
-    setTimeout(act, 100)
+    setTimeout(act, 1000)
 })

@@ -88,7 +88,6 @@ function Home(props) {
         localStorage.setItem('choiceCount', choiceCount.toString())
         localStorage.setItem('voterCount', voterCount.toString())
         localStorage.setItem('choices', JSON.stringify(choices))
-
         history.push("/vote");
     }
 
@@ -100,7 +99,7 @@ function Home(props) {
                 () => {
                     setSplashShowed(false)
                 }
-                , 2000);
+                , 4000);
         }
 
         return () => {
@@ -125,7 +124,7 @@ function Home(props) {
                         alignItems="stretch"
                     >
                         <Grid item style={{textAlign: "center"}}>
-                            <Typography className={classes.head}>Ruby Tideman With C-Academy</Typography>
+                            <Typography className={classes.head}>Ruby Tideman With Coder Academy</Typography>
                         </Grid>
                         <div style={{backgroundColor: "lightgray", height: 1, width: "100%", margin: 10}}/>
                         <Grid item style={{margin: 10}}>
