@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: 30,
-        width: 700,
+        width: 800,
 
     },
     head: {

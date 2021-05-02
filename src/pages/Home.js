@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: 30,
-        width: 700,
+        width: 800,
 
     },
     head: {
-        fontSize: 20,
+        fontSize: 25,
         fontWeight: 700,
     },
     addBtn: {
@@ -191,13 +191,7 @@ function Home(props) {
 
             </Paper>
 
-            <Button
-                onClick={getData}
-                className={classes.addBtn}
-                disabled={choices.length !== choiceCount}
-            >
-                Test
-                            </Button>
+
         </div>
     );
 }
