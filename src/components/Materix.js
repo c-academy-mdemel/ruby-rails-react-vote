@@ -11,7 +11,7 @@ function Materix({data}) {
                     <TableBody>
                         {data.map((row) => (
 
-                            <TableRow key={Math.random()}>
+                            <TableRow key={Math.random()} style={{transition: "transform 300ms ease"}}>
                                 {row.map(col =>
                                     <TableCell
                                         align="right"
