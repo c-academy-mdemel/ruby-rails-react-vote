@@ -87,10 +87,10 @@ function Vote(props) {
         setVotes(tempVotes)
         setIsSorted(false)
 
-        const res = await getDataDummy(
+        const res = await getData(
             {
                 cc: choiceCount,
-                vc: voterCount,
+                vc: Object.keys(tempVotes).length,
                 vs: Object.keys(tempVotes).map((voter) => (
                     {name: voter, votes: tempVotes[voter].map(choice => (choice.index))}
                 ))
@@ -107,7 +107,15 @@ function Vote(props) {
 
     async function handleFinalSubmit() {
         setLoading(true)
-        const data = await getDataDummy("gf")
+        const data  = await getData(
+            {
+                cc: choiceCount,
+                vc: Object.keys(votes).length,
+                vs: Object.keys(votes).map((voter) => (
+                    {name: voter, votes: votes[voter].map(choice => (choice.index))}
+                ))
+            }
+        )
         localStorage.setItem("finalResult",JSON.stringify(data))
         setLoading(false)
         history.push("/algo");
