@@ -54,7 +54,7 @@ function Pairs(props) {
                 <ArrowForwardIcon/>
             </Grid>
             <Grid item>
-                <ColorChangingMatrix data={lastMatrix} X={pairs[currentIndex].loser} Y={pairs[currentIndex].winner}/>
+                <ColorChangingMatrix data={lastMatrix} Y={pairs[currentIndex].loser} X={pairs[currentIndex].winner}/>
             </Grid>
         </Grid>
     );

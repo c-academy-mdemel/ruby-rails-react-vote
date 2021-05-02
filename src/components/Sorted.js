@@ -54,7 +54,7 @@ function Sorted(props) {
                 <ArrowForwardIcon/>
             </Grid>
             <Grid item>
-                <ColorChangingMatrix data={lastMatrix} X={sorted[currentIndex].loser} Y={sorted[currentIndex].winner}/>
+                <ColorChangingMatrix data={lastMatrix} Y={sorted[currentIndex].loser} X={sorted[currentIndex].winner}/>
             </Grid>
         </Grid>
     );
