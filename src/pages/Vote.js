@@ -6,7 +6,10 @@ import {
     ListItemText, Divider
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {getData} from "../util/api";
+import {getData, getDataDummy} from "../util/api";
+import MatrixWrapper from "../components/MatrixWrapper";
+import ReactLoading from 'react-loading';
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
         display: "grid",
         placeItems: "center",
         placeContent: "center",
-        paddingTop: 10,
+        paddingTop: 20,
+        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
     },
     paper: {
         padding: 30,
@@ -54,18 +58,23 @@ function Vote(props) {
     const [choiceCount, setChoiceCount] = useState(parseInt(localStorage.getItem("choiceCount")))
     const [voterCount, setVoterCount] = useState(parseInt(localStorage.getItem("voterCount")))
     const [voterName, setVoterName] = useState("")
+    const [loading, setLoading] = useState(false)
     const [choices, setChoices] = useState(JSON.parse(localStorage.getItem("choices")))
     const [sortedChoices, setSortedChoices] = useState(JSON.parse(localStorage.getItem("choices")))
     const [isSorted, setIsSorted] = useState(false)
     const [votes, setVotes] = useState({})
-    const classes = useStyles()
 
+    //results
+    const [intermediateMatrices, setIntermediateMatrices] = useState([])
+    const classes = useStyles()
+    const history = useHistory();
     function getNewArray(array) {
 
         setSortedChoices(array)
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
+        setLoading(true)
         e.preventDefault()
         setVoterName("")
         setSortedChoices(choices)
@@ -78,12 +87,32 @@ function Vote(props) {
         setVotes(tempVotes)
         setIsSorted(false)
 
+        const res = await getDataDummy(
+            {
+                cc: choiceCount,
+                vc: voterCount,
+                vs: Object.keys(tempVotes).map((voter) => (
+                    {name: voter, votes: tempVotes[voter].map(choice => (choice.index))}
+                ))
+            }
+        )
+
+        setIntermediateMatrices(
+          res.data.intermediates[res.data.intermediates.length-1].intermediate
+            //res.data.intermediates[Object.keys(tempVotes).length].intermediate
+        )
+
+        setLoading(false)
     }
 
     async function handleFinalSubmit() {
-        const data = await getData("gf")
-        console.log(data)
+        setLoading(true)
+        const data = await getDataDummy("gf")
+        localStorage.setItem("finalResult",JSON.stringify(data))
+        setLoading(false)
+        history.push("/algo");
     }
+
 
     return (
         <div className={classes.root}>
@@ -94,8 +123,12 @@ function Vote(props) {
                     justify="center"
                     alignItems="stretch"
                 >
-                    <Grid item style={{textAlign: "center"}}>
-                        <Typography className={classes.head}>Vote</Typography>
+                    <Grid item style={{textAlign: "center", display: "flex"}}>
+                        <Typography className={classes.head}>Vote </Typography>
+
+                        <div style={{marginTop: -18,marginLeft:20}}>
+                            {loading && <ReactLoading type="bars" color="#00bcd4" height={20}/>}
+                        </div>
                     </Grid>
                     <Grid
                         item
@@ -106,17 +139,17 @@ function Vote(props) {
                     >
                         <Grid item>
                             <Grid item style={{margin: 10}}>
-                            <TextField
-                                value={voterName}
-                                label="Enter Voter Name"
-                                type="text"
-                                disabled={Object.keys(votes).length >= voterCount}
-                                fullWidth
-                                onChange={(e) => {
-                                    setVoterName(e.target.value)
-                                }}
-                            />
-                        </Grid>
+                                <TextField
+                                    value={voterName}
+                                    label="Enter Voter Name"
+                                    type="text"
+                                    disabled={Object.keys(votes).length >= voterCount}
+                                    fullWidth
+                                    onChange={(e) => {
+                                        setVoterName(e.target.value)
+                                    }}
+                                />
+                            </Grid>
                             <Grid item style={{margin: 10}}>
                                 <Typography className={classes.title}>Select Choice Order (Drag and Drop)</Typography>
                                 <SortableListWrapper initialItems={sortedChoices} getNewArray={getNewArray}
@@ -126,12 +159,12 @@ function Vote(props) {
 
                         <Grid item>
                             <Grid item style={{margin: 10}}>
-                             uj
+                                <MatrixWrapper intermediateMatrices={intermediateMatrices}/>
                             </Grid>
                         </Grid>
 
                     </Grid>
-                    <Grid item style={{margin:20}}>
+                    <Grid item style={{margin: 20}}>
                         <Divider orientation="horizontal"/>
                     </Grid>
                     <Grid item
@@ -156,6 +189,7 @@ function Vote(props) {
                                     Go to Results
                                 </Button>}
                         </Grid>
+
                         {Object.keys(votes).length < voterCount && <Grid item>
                             <Typography style={{color: "red"}}>
                                 {voterName === "" ? "Enter Voter Name" : ""}
@@ -168,11 +202,11 @@ function Vote(props) {
                         </Grid>
 
                     </Grid>
-                    <Grid item style={{margin:20}}>
+                    <Grid item style={{margin: 20}}>
                         <Divider orientation="horizontal"/>
                     </Grid>
                     <Grid item>
-                        <div style={{display: "flex", marginTop: 20}}>
+                        <div style={{display: "flex", marginTop: 20,width:700,overflowX:"auto"}}>
                             {Object.keys(votes).map(v => {
                                 return (
                                     <List key={Math.random()}>
