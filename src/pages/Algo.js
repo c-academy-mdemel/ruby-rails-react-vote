@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import {Grid, Paper, Typography} from "@material-ui/core";
 import Materix from "../components/Materix";
+import ColorChangingMatrix from "../components/ColorChangingMatrix";
+import Pairs from "../components/Pairs";
+import Sorted from "../components/Sorted";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         display: "grid",
         placeItems: "center",
         placeContent: "center",
-        paddingTop: 100,
+        paddingTop: 10,
     },
     paper: {
         padding: 30,
@@ -26,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 function Algo(props) {
     const classes = useStyles()
     const [res, setRes] = useState(JSON.parse(localStorage.getItem("finalResult")))
-    console.log(res.data)
+
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -39,21 +43,18 @@ function Algo(props) {
                     <Grid item style={{textAlign: "center"}}>
                         <Typography className={classes.head}>Final Result</Typography>
                     </Grid>
-                    <Grid item style={{textAlign: "left",margin:20}}>
+
+                    <Grid item style={{textAlign: "left", margin: 20}}>
+                        <Typography>Pairs</Typography>
+                        <Pairs/>
+                    </Grid>
+                    <Grid item style={{textAlign: "left", margin: 20}}>
+                        <Typography>Sorted</Typography>
+                        <Sorted/>
+                    </Grid>
+                    <Grid item style={{textAlign: "left", margin: 20}}>
                         <Typography>Arrow Lock</Typography>
                         <Materix data={res.data.arrow_lock}/>
-                    </Grid>
-                    <Grid item style={{textAlign: "left",margin:20}}>
-                        <Typography>Pairs</Typography>
-                        <Materix data={res.data.pairs.map(i=>(
-                            [`winner : ${i.winner}`,`looser : ${i.loser}`,`value : ${i.value}`,]
-                        ))}/>
-                    </Grid>
-                    <Grid item style={{textAlign: "left",margin:20}}>
-                        <Typography>Sorted</Typography>
-                        <Materix data={res.data.sorted.map(i=>(
-                            [`winner : ${i.winner}`,`looser : ${i.loser}`,`value : ${i.value}`,]
-                        ))}/>
                     </Grid>
                 </Grid>
             </Paper>

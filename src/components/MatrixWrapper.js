@@ -10,7 +10,7 @@ const dummy = [
     [[25, 26, 82, 867],
         [34, 26, 82, 14],
         [8, 324, 42, 66],
-        [7, 252, 86, 79],],
+        [7, 252, 86, 79]],
     [[98, 26, 56, 32],
         [65, 26, 82, 14],
         [8, 66, 42, 82],
@@ -51,7 +51,8 @@ function MatrixWrapper({intermediateMatrices}) {
     const [currentIndex, setCurrentIndex] = useState(0)
 
 
-    React.useEffect(() => {
+
+    useEffect(() => {
         // Move on to the next message every `n` milliseconds
         let timeout;
         if (intermediateMatrices) {
