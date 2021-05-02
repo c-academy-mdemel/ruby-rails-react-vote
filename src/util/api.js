@@ -51,11 +51,8 @@ export const getDataDummy = (passes) => new Promise((resolve, reject) => {
                         current_vote: [2, 1, 0],
                         intermediate: [[[0, 5, 1], [2, 8, 2], [2, 7, 0]], [[0, 7, 2], [2, 1, 2], [2, 7, 0]], [[0, 2, 2], [2, 1, 2], [7, 9, 0]]]
                     }],
-                    pairs: [{winner: 1, loser: 0, value: 2}, {
-                        winner: 2,
-                        loser: 0,
-                        value: 2
-                    }, {winner: 2, loser: 1, value: 2}],
+                    pairs: [
+                        {winner: 1, loser: 0, value: 2}, {winner: 2, loser: 0, value: 2}, {winner: 2, loser: 1, value: 2}],
                     sorted: [{winner: 2, loser: 0, value: 2}, {
                         winner: 2,
                         loser: 1,
