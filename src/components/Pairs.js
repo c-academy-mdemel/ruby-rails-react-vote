@@ -58,7 +58,7 @@ function Pairs(props) {
                 <ColorChangingMatrix data={lastMatrix} Y={pairs[currentIndex].loser} X={pairs[currentIndex].winner}/>
             </Grid>
         </Grid>
-            <AnimatedSortingList sorted={res.data.sorted} notSorted={res.data.pairs}/>
+            {/*<AnimatedSortingList sorted={res.data.sorted} notSorted={res.data.pairs}/>*/}
         </div>
 
     );

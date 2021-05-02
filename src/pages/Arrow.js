@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import { Paper, Typography, Grid, TextField, Button, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import DeleteIcon from '@material-ui/icons/Delete';
-import { useHistory } from "react-router-dom";
-import { getData } from "../util/api";
-
-
-
 import * as go from 'gojs';
 import { ReactDiagram } from 'gojs-react';
-import { NoEncryption } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -129,7 +121,7 @@ function Arrow(props) {
     }
     console.log(createNodeArray(res.data.arrow_lock));
     return (
-        <div>
+        <div style={{}}>
             <ReactDiagram
                 initDiagram={initDiagram}
                 divClassName={classes.arrow}
