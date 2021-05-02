@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         padding: 30,
-        width: 800,
+        width: "90vw",
 
     },
     head: {
@@ -129,7 +129,7 @@ function Vote(props) {
                     container
                     direction="column"
                     justify="center"
-                    alignItems="stretch"
+                    alignItems="flex-start"
                 >
                     <Grid item style={{textAlign: "center", display: "flex"}}>
                         <Typography className={classes.head}>Vote </Typography>
@@ -142,7 +142,7 @@ function Vote(props) {
                         item
                         container
                         direction="row"
-                        justify="space-between"
+                        justify="space-around"
                         alignItems="center"
                     >
                         <Grid item>

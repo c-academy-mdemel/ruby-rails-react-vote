@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "teal"
     },
     cell: {
-        width: 100,
+        width: 150,
         padding: 10,
         borderStyle: "solid",
         borderWidth: 0.5,
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 function AnimatedSortingList({sorted, notSorted}) {
     const classes = useStyles()
     const [rows, set] = useState(notSorted);
-    const height = 52;
+    const height = 55;
     const transitions = useTransition(
         rows.map((d, i) => ({...d, y: i * height})),
         d => d.id,

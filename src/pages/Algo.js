@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
         display: "grid",
         placeItems: "center",
         placeContent: "center",
-        paddingTop: 10,
+        paddingTop: 20,
         background: "linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
 
     },
     paper: {
         padding: 30,
-        width: 1100,
+        width: "90vw",
 
     },
     head: {
@@ -44,7 +44,7 @@ function Algo(props) {
                     container
                     direction="column"
                     justify="center"
-                    alignItems="center"
+                    alignItems="flex-start"
                     spacing={5}
                 >
                     <Grid item style={{textAlign: "center"}}>
@@ -61,16 +61,16 @@ function Algo(props) {
                           spacing={2}
                           alignItems="flex-start">
                         <Grid item>
-                            <Typography className={classes.title}>Pairs</Typography>
+                            <Typography className={classes.title}>Pairs (Step 1)</Typography>
                             <Pairs/>
                         </Grid>
                         <Grid item>
-                            <Typography className={classes.title}>Sorted</Typography>
+                            <Typography className={classes.title}>Sorted (Step 2)</Typography>
                             <Sorted/>
                         </Grid>
                     </Grid>
                     <Grid item>
-                        <Typography className={classes.title}>Arrow Lock</Typography>
+                        <Typography className={classes.title}>Arrow Lock (Step 3)</Typography>
                         <Arrow/>
                     </Grid>
                 </Grid>
