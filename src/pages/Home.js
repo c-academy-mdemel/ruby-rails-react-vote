@@ -228,8 +228,6 @@ function Home(props) {
                                     {choices.length < choiceCount ? `Enter ${choiceCount - choices.length} more choice` : choiceCount <= 0 ? "Choice Count is not valid" : voterCount <= 0 ? "Voter Count is not valid" : ""}
                                 </Typography>
                             </Grid>
-
-
                         </Grid>
 
                     </Grid>
