@@ -55,7 +55,7 @@ function Algo(props) {
                     <Grid item container
                           direction="row"
                           justify="space-around"
-                          alignItems="center">
+                          alignItems="flex-start">
                         <Grid item>
                             <Typography className={classes.title}>Pairs</Typography>
                             <Pairs/>
@@ -64,11 +64,9 @@ function Algo(props) {
                             <Typography className={classes.title}>Sorted</Typography>
                             <Sorted/>
                         </Grid>
-
                     </Grid>
                     <Grid item>
                         <Typography className={classes.title}>Arrow Lock</Typography>
-                        {/*<Materix data={res.data.arrow_lock}/>*/}
                         <Arrow/>
                     </Grid>
                 </Grid>

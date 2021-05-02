@@ -14,8 +14,8 @@ const sorted = [{winner: 0, loser: 0, value: 2}, {
 }, {winner: 15, loser: 11, value: 2},{winner: 25, loser: 11, value: 2}]
 
 
-function AnimatedSortingList(props) {
-    const [rows, set] = useState(pairs);
+function AnimatedSortingList({sorted,notSorted}) {
+    const [rows, set] = useState(notSorted);
     const height = 20;
     const transitions = useTransition(
         rows.map((d, i) => ({ ...d, y: i * height })),

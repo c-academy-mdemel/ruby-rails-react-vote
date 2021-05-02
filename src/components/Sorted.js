@@ -3,6 +3,7 @@ import ColorChangingMatrix from "./ColorChangingMatrix";
 import Grid from "@material-ui/core/Grid";
 import Materix from "./ColorChangingMatrix";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import AnimatedSortingList from "./AnimatedSortingList";
 
 function Sorted(props) {
     const [res, setRes] = useState(JSON.parse(localStorage.getItem("finalResult")))
@@ -40,21 +41,18 @@ function Sorted(props) {
             justify="center"
             alignItems="center"
         >
-            <Grid item>
-                <Materix
-                    data={
-                        sorted.slice(0, currentIndex + 1).map(i => (
-                                [`winner : ${i.winner}`, `looser : ${i.loser}`, `value : ${i.value}`]
-                            )
-                        )
-                    }
-                />
-            </Grid>
+            {/*<Grid item>*/}
+            {/*    <Materix*/}
+            {/*        data={*/}
+            {/*            sorted.slice(0, currentIndex + 1).map(i => (*/}
+            {/*                    [`winner : ${i.winner}`, `looser : ${i.loser}`, `value : ${i.value}`]*/}
+            {/*                )*/}
+            {/*            )*/}
+            {/*        }*/}
+            {/*    />*/}
+            {/*</Grid>*/}
             <Grid item style={{marginLeft:20,marginRight:20}}>
-                <ArrowForwardIcon/>
-            </Grid>
-            <Grid item>
-                <ColorChangingMatrix data={lastMatrix} Y={sorted[currentIndex].loser} X={sorted[currentIndex].winner}/>
+                <AnimatedSortingList sorted={res.data.sorted} notSorted={res.data.pairs}/>
             </Grid>
         </Grid>
     );
