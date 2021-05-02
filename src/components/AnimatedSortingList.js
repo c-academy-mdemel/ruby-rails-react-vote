@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useTransition, animated} from "react-spring";
 import {Button, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-
+import CachedIcon from '@material-ui/icons/Cached';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,16 +15,19 @@ const useStyles = makeStyles((theme) => ({
         placeItems: "center",
     },
     btn: {
+        background: "#00bcd4",
         margin: 10,
-        backgroundColor: "teal"
+        fontFamily:"serif",
+        fontSize:15
     },
     cell: {
-        width: 150,
+       minWidth:100,
         padding: 10,
         borderStyle: "solid",
         borderWidth: 0.5,
         borderRadius: 0,
         borderColor: "lightgray",
+
     },
     row: {
         display: "flex",
@@ -49,7 +52,7 @@ function AnimatedSortingList({sorted, notSorted}) {
     return (
         <div className={classes.root}>
             <div className={classes.btnWrapper}>
-                <Button className={classes.btn} onClick={() => set(sorted)}>Sort</Button>
+                <Button className={classes.btn} startIcon={<CachedIcon/>} onClick={() => set(sorted)}>Sort</Button>
             </div>
 
             <Paper elevation={5}>
@@ -61,7 +64,7 @@ function AnimatedSortingList({sorted, notSorted}) {
                             ...rest
                         }}
                     >
-                        <div className={classes.row}>
+                        <Paper className={classes.row}>
                             <div className={classes.cell}>
                                 <Typography>winner : {item.winnerName}</Typography>
                                 <Typography>index : {item.winnerIndex}</Typography>
@@ -73,7 +76,7 @@ function AnimatedSortingList({sorted, notSorted}) {
                             <div className={classes.cell}>
                                 <Typography> value : {item.value}</Typography>
                             </div>
-                        </div>
+                        </Paper>
                     </animated.div>
                 ))}
             </Paper>

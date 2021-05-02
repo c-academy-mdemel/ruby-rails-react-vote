@@ -3,7 +3,7 @@ import { Paper, Typography, Grid, TextField, Button, IconButton } from "@materia
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from "react-router-dom";
-import { getData } from "../util/api";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -14,20 +14,26 @@ const useStyles = makeStyles((theme) => ({
         placeItems: "center",
         placeContent: "center",
         paddingTop: 20,
-        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
+        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(244,124,124,1) 0%, rgba(238,199,193,1) 27%, rgba(255,255,255,1) 67%)",
+        fontFamily:"serif"
     },
     paper: {
         padding: 30,
         width: "90vw",
-
+        minHeight:"85vh"
     },
     head: {
-        fontSize: 25,
+        fontSize: 28,
         fontWeight: 700,
+        fontFamily:"serif"
     },
     addBtn: {
         background: "#00bcd4",
-        height: 40
+        marginLeft:10,
+        height:50,
+        fontFamily:"serif",
+        textTransform:"none",
+        fontSize:17
     },
     listItem: {
         display: "flex",
@@ -37,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 5,
         borderColor: "beige",
         padding: 5,
-        width: 180
+        width: 180,
+        fontFamily:"serif"
     },
 }))
 
@@ -86,11 +93,13 @@ function Home(props) {
                     <Grid item style={{ textAlign: "center" }}>
                         <Typography className={classes.head}>Ruby Tideman With C-Academy</Typography>
                     </Grid>
+                    <div style={{backgroundColor:"lightgray",height:1,width:"100%",margin:10}}/>
                     <Grid item style={{ margin: 10 }}>
                         <TextField
                             value={choiceCount}
                             label="Enter Number of Choices"
                             type="number"
+                            variant="outlined"
                             fullWidth
                             onChange={(e) => {
                                 setChoiceCount(parseInt(e.target.value))
@@ -103,6 +112,7 @@ function Home(props) {
                                 disabled={choices.length >= choiceCount}
                                 label="Enter Choice"
                                 type="text"
+                                variant="outlined"
                                 fullWidth
                                 value={choiceInput}
                                 onChange={(e) => {
@@ -156,6 +166,7 @@ function Home(props) {
                             value={voterCount}
                             label="Enter Number of Voters"
                             type="number"
+                            variant="outlined"
                             fullWidth
                             onChange={(e) => {
                                 setVoterCount(parseInt(e.target.value))
@@ -173,12 +184,13 @@ function Home(props) {
                                 onClick={handleSubmit}
                                 className={classes.addBtn}
                                 disabled={choices.length !== choiceCount}
+                                endIcon={<ArrowForwardIcon/>}
                             >
                                 Submit
                             </Button>
                         </Grid>
                         <Grid item>
-                            <Typography style={{ color: "red" }}>
+                            <Typography style={{ color: "red", fontFamily:"serif",fontSize:17 }}>
                                 {choices.length < choiceCount ? `Enter ${choiceCount - choices.length} more choice` : choiceCount <= 0 ? "Choice Count is not valid" : voterCount <= 0 ? "Voter Count is not valid" : ""}
                             </Typography>
                         </Grid>

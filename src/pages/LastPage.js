@@ -6,8 +6,7 @@ import Sorted from "../components/Sorted";
 import Arrow from "./Arrow";
 import Button from "@material-ui/core/Button";
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {useHistory} from "react-router-dom";
+import Materix from "../components/ColorChangingMatrix";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,10 +42,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-function Algo(props) {
+function LastPage(props) {
     const classes = useStyles()
     const [res, setRes] = useState(JSON.parse(localStorage.getItem("finalResult")))
-    const history = useHistory();
+    const lastMatrices = res.data.intermediates[res.data.intermediates.length - 1].intermediate
+    const lastMatrix = lastMatrices[lastMatrices.length - 1]
     return (
         <div className={classes.root}>
             <Paper className={classes.paper}>
@@ -54,60 +54,51 @@ function Algo(props) {
                     container
                     direction="column"
                     justify="center"
-                    alignItems="flex-start"
+                    alignItems="flex-end"
                     spacing={5}
                 >
-                    <Grid item style={{textAlign: "center"}}>
-                        <Typography className={classes.head}>Final Result ( 1 )</Typography>
-                        <Button
-                            className={classes.nxtBtn}
-                            onClick={() => {
-                                window.location.reload(false);
-                            }}
-                            startIcon={<PlayArrowIcon/>}
-                        >Replay</Button>
+                    <Grid item style={{textAlign: "center"}}   container  alignItems="stretch">
+                        <div style={{width:"100%",textAlign:'left'}}
+                             >
+                            <Typography className={classes.head}>Final Result ( 2 )</Typography>
+                            <Button
+                                className={classes.nxtBtn}
+                                onClick={() => {
+                                    window.location.reload(false);
+                                }}
+                                startIcon={<PlayArrowIcon/>}
+                            >Replay</Button>
+                        </div>
+
                     </Grid>
                     <div style={{backgroundColor:"lightgray",height:1,width:"100%",margin:5}}/>
                     <Grid item container
                           direction="row"
-                          justify="flex-start"
-                          spacing={2}
-                          alignItems="flex-start">
+                          justify="space-around"
+                          alignItems="flex-start"
+                          spacing={10}
+                    >
                         <Grid item>
-                            <Typography className={classes.title}>Pairs (Step 1)</Typography>
-                            <Pairs/>
+                            <Grid item>
+                                <Typography className={classes.title}>Sorted (Step 1)</Typography>
+                                <Sorted/>
+                            </Grid>
                         </Grid>
                         <Grid item>
-                            <Typography className={classes.title}>Sorted (Step 2)</Typography>
-                            <Sorted/>
+                          <Typography className={classes.title}>Matrix (Step 2)</Typography>
+                            <Materix data={lastMatrix} />
                         </Grid>
                     </Grid>
-                    <Grid item container
-                          direction="row"
-                          justify="flex-start"
-                          spacing={2}
-                          alignItems="flex-start">
-                        <Grid item>
+                    <Grid item>
+
                             <Typography className={classes.title}>Arrow Lock (Step 3)</Typography>
                             <Arrow/>
-                        </Grid>
-                        <Grid item>
-                            <Button
-                                className={classes.nxtBtn}
-                            onClick={() => {
-                                history.push("/last");
-                            }}
-                            endIcon={<ArrowForwardIcon/>}
-                        >Next</Button>
-                        </Grid>
+
                     </Grid>
-
-
                 </Grid>
-
             </Paper>
         </div>
     );
 }
 
-export default Algo;
+export default LastPage;
