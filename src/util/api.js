@@ -39,9 +39,9 @@ export const getDataDummy = (passes) => new Promise((resolve, reject) => {
                     }, { winner: 2, loser: 1, value: 2 }],
                     sorted: [{ winner: 2, loser: 0, value: 2 }, {
                         winner: 2,
-                        loser: 1,
+                        loser: 9,
                         value: 2
-                    }, { winner: 1, loser: 0, value: 2 }],
+                    }, { winner: 1, loser:11, value: 2 }],
                     arrow_lock: [[false, true, true], [false, false, true], [false, false, false]]
                 }
             }

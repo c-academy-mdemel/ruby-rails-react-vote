@@ -3,6 +3,7 @@ import ColorChangingMatrix from "./ColorChangingMatrix";
 import Grid from "@material-ui/core/Grid";
 import Materix from "./ColorChangingMatrix";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import AnimatedSortingList from "./AnimatedSortingList";
 
 function Pairs(props) {
     const [res, setRes] = useState(JSON.parse(localStorage.getItem("finalResult")))
@@ -34,7 +35,7 @@ function Pairs(props) {
         setCurrentIndex(0)
     }, [pairs])
     return (
-        <Grid
+        <div><Grid
             container
             direction="row"
             justify="center"
@@ -50,13 +51,16 @@ function Pairs(props) {
                     }
                 />
             </Grid>
-            <Grid item style={{marginLeft:20,marginRight:20}}>
+            <Grid item style={{marginLeft: 20, marginRight: 20}}>
                 <ArrowForwardIcon/>
             </Grid>
             <Grid item>
                 <ColorChangingMatrix data={lastMatrix} Y={pairs[currentIndex].loser} X={pairs[currentIndex].winner}/>
             </Grid>
         </Grid>
+            <AnimatedSortingList sorted={res.data.sorted} notSorted={res.data.pairs}/>
+        </div>
+
     );
 }
 

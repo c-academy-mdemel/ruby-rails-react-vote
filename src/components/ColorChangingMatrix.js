@@ -36,7 +36,7 @@ function Materix({data, X, Y}) {
     // useEffect(() => {
     //     setColor(false)
     // }, [data])
-    console.log(data, X, Y, color)
+
     return (
         data ? <FadeIn> <TableContainer component={Paper}>
                 <Table aria-label="simple table">
