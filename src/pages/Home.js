@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useHistory } from "react-router-dom";
 import { getData } from "../util/api";
 
+import Fade from '@material-ui/core/Fade';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         placeItems: "center",
         placeContent: "center",
         paddingTop: 20,
-        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
+        background: "linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
     },
     paper: {
         padding: 30,
@@ -39,6 +40,14 @@ const useStyles = makeStyles((theme) => ({
         padding: 5,
         width: 180
     },
+    splash: {
+        background: "white",
+        width: '100vw',
+        height: '100vh',
+        position: "absolute",
+        zIndex: 100000,
+        textAlign: "center",
+    }
 }))
 
 function Home(props) {
@@ -48,6 +57,8 @@ function Home(props) {
     const [voterCount, setVoterCount] = useState(0)
     const [choices, setChoices] = useState([])
     const [choiceInput, setChoiceInput] = useState("")
+    const [fade, setFade] = React.useState(true);
+
 
     function handleChoiceAdd(e) {
         e.preventDefault()
@@ -74,125 +85,141 @@ function Home(props) {
         history.push("/vote");
     }
 
+    setTimeout(() => {
+        setFade(false);
+    }, 2000);
+
     return (
-        <div className={classes.root}>
-            <Paper className={classes.paper}>
-                <Grid
-                    container
-                    direction="column"
-                    justify="center"
-                    alignItems="stretch"
-                >
-                    <Grid item style={{ textAlign: "center" }}>
-                        <Typography className={classes.head}>Ruby Tideman With C-Academy</Typography>
-                    </Grid>
-                    <Grid item style={{ margin: 10 }}>
-                        <TextField
-                            value={choiceCount}
-                            label="Enter Number of Choices"
-                            type="number"
-                            fullWidth
-                            onChange={(e) => {
-                                setChoiceCount(parseInt(e.target.value))
-                            }}
-                        />
-                    </Grid>
-                    <Grid item style={{ margin: 10 }}>
-                        <form style={{ display: "flex" }} onSubmit={handleChoiceAdd}>
-                            <TextField
-                                disabled={choices.length >= choiceCount}
-                                label="Enter Choice"
-                                type="text"
-                                fullWidth
-                                value={choiceInput}
-                                onChange={(e) => {
-                                    setChoiceInput((e.target.value))
-                                }}
-                                helperText={choices.length === 0 ? "Choice Count Is Zero" : choices.length >= choiceCount ? "Choice Count Reached" : ""}
-                            />
-                            <Button
-                                size="small"
-                                className={classes.addBtn}
-                                disabled={choices.length >= choiceCount || choiceInput === ""}
-                                type={"submit"}
-                            >
-                                Add
-                            </Button>
-                        </form>
-                    </Grid>
-                    <Grid item>
-                        {/*<TransferList choices={choices} />*/}
-                        <div style={{ display: "block", margin: 15 }}>
-                            {choices.map((choice, index) => (
-                                <Grid
-                                    container
-                                    direction="row"
-                                    justify="space-between"
-                                    alignItems="center"
-                                    className={classes.listItem}
-                                    key={index}
-                                >
-                                    {/*<div className={classes.listItem}>*/}
-                                    <Grid item> <Typography>{choice}</Typography></Grid>
-                                    <Grid item>
-                                        <IconButton
-                                            aria-label="delete" size="small" style={{ marginTop: -4, marginLeft: 8 }}
-                                            id={choice} name={choice}
-                                            onClick={(e) => handleDelete(index)}
-                                        >
-                                            <DeleteIcon fontSize="small" style={{ color: "red" }} />
-                                        </IconButton>
-                                    </Grid>
+        <>
+            <Fade in={fade}>
+                <div className={classes.splash}>
+                    <img src="/splash.jpg" width="30%"></img>
+                </div>
+            </Fade>
 
 
-                                    {/*</div>*/}
-                                </Grid>
-                            )
-                            )}
-                        </div>
-                    </Grid>
-                    <Grid item style={{ margin: 10 }}>
-                        <TextField
-                            value={voterCount}
-                            label="Enter Number of Voters"
-                            type="number"
-                            fullWidth
-                            onChange={(e) => {
-                                setVoterCount(parseInt(e.target.value))
-                            }}
-                        />
-                    </Grid>
-                    <Grid item
+            <div className={classes.root}>
+
+
+
+                <Paper className={classes.paper}>
+                    <Grid
                         container
-                        direction="row"
-                        justify="space-around"
-                        alignItems="center"
+                        direction="column"
+                        justify="center"
+                        alignItems="stretch"
                     >
-                        <Grid item>
-                            <Button
-                                onClick={handleSubmit}
-                                className={classes.addBtn}
-                                disabled={choices.length !== choiceCount}
-                            >
-                                Submit
+                        <Grid item style={{ textAlign: "center" }}>
+                            <Typography className={classes.head}>Ruby Tideman With C-Academy</Typography>
+                        </Grid>
+                        <Grid item style={{ margin: 10 }}>
+                            <TextField
+                                value={choiceCount}
+                                label="Enter Number of Choices"
+                                type="number"
+                                fullWidth
+                                onChange={(e) => {
+                                    setChoiceCount(parseInt(e.target.value))
+                                }}
+                            />
+                        </Grid>
+                        <Grid item style={{ margin: 10 }}>
+                            <form style={{ display: "flex" }} onSubmit={handleChoiceAdd}>
+                                <TextField
+                                    disabled={choices.length >= choiceCount}
+                                    label="Enter Choice"
+                                    type="text"
+                                    fullWidth
+                                    value={choiceInput}
+                                    onChange={(e) => {
+                                        setChoiceInput((e.target.value))
+                                    }}
+                                    helperText={choices.length === 0 ? "Choice Count Is Zero" : choices.length >= choiceCount ? "Choice Count Reached" : ""}
+                                />
+                                <Button
+                                    size="small"
+                                    className={classes.addBtn}
+                                    disabled={choices.length >= choiceCount || choiceInput === ""}
+                                    type={"submit"}
+                                >
+                                    Add
                             </Button>
+                            </form>
                         </Grid>
                         <Grid item>
-                            <Typography style={{ color: "red" }}>
-                                {choices.length < choiceCount ? `Enter ${choiceCount - choices.length} more choice` : choiceCount <= 0 ? "Choice Count is not valid" : voterCount <= 0 ? "Voter Count is not valid" : ""}
-                            </Typography>
-                        </Grid>
+                            {/*<TransferList choices={choices} />*/}
+                            <div style={{ display: "block", margin: 15 }}>
+                                {choices.map((choice, index) => (
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        justify="space-between"
+                                        alignItems="center"
+                                        className={classes.listItem}
+                                        key={index}
+                                    >
+                                        {/*<div className={classes.listItem}>*/}
+                                        <Grid item> <Typography>{choice}</Typography></Grid>
+                                        <Grid item>
+                                            <IconButton
+                                                aria-label="delete" size="small" style={{ marginTop: -4, marginLeft: 8 }}
+                                                id={choice} name={choice}
+                                                onClick={(e) => handleDelete(index)}
+                                            >
+                                                <DeleteIcon fontSize="small" style={{ color: "red" }} />
+                                            </IconButton>
+                                        </Grid>
 
+
+                                        {/*</div>*/}
+                                    </Grid>
+                                )
+                                )}
+                            </div>
+                        </Grid>
+                        <Grid item style={{ margin: 10 }}>
+                            <TextField
+                                value={voterCount}
+                                label="Enter Number of Voters"
+                                type="number"
+                                fullWidth
+                                onChange={(e) => {
+                                    setVoterCount(parseInt(e.target.value))
+                                }}
+                            />
+                        </Grid>
+                        <Grid item
+                            container
+                            direction="row"
+                            justify="space-around"
+                            alignItems="center"
+                        >
+                            <Grid item>
+                                <Button
+                                    onClick={handleSubmit}
+                                    className={classes.addBtn}
+                                    disabled={choices.length !== choiceCount}
+                                >
+                                    Submit
+                            </Button>
+                            </Grid>
+                            <Grid item>
+                                <Typography style={{ color: "red" }}>
+                                    {choices.length < choiceCount ? `Enter ${choiceCount - choices.length} more choice` : choiceCount <= 0 ? "Choice Count is not valid" : voterCount <= 0 ? "Voter Count is not valid" : ""}
+                                </Typography>
+                            </Grid>
+
+
+                        </Grid>
 
                     </Grid>
 
-                </Grid>
+
+                </Paper>
 
 
-            </Paper>
-
-
-        </div>
+            </div>
+        </>
     );
 }
 
