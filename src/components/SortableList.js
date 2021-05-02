@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
         height: 40
     },
     listItem: {
+        fontSize: 15,
+        fontFamily:"serif",
         margin: 5,
         borderStyle: "solid",
         borderWidth: 1,

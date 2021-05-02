@@ -10,7 +10,8 @@ import {getData} from "../util/api";
 import MatrixWrapper from "../components/MatrixWrapper";
 import ReactLoading from 'react-loading';
 import {useHistory} from "react-router-dom";
-
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import SaveIcon from '@material-ui/icons/Save';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: "100%",
@@ -19,32 +20,38 @@ const useStyles = makeStyles((theme) => ({
         placeItems: "center",
         placeContent: "center",
         paddingTop: 20,
-        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(96,153,229,1) 0%, rgba(193,199,238,1) 16%, rgba(255,255,255,1) 67%)"
+        background:"linear-gradient(169deg, rgba(6,110,221,1) 0%, rgba(244,124,124,1) 0%, rgba(238,199,193,1) 27%, rgba(255,255,255,1) 67%)"
     },
     paper: {
         padding: 30,
         width: "90vw",
-
+        minHeight:"85vh"
     },
     head: {
-        fontSize: 20,
+        fontSize: 28,
         fontWeight: 700,
+        fontFamily:"serif"
     },
     title: {
-        fontSize: 15,
+        fontSize: 18,
         fontWeight: 700,
+        fontFamily:"serif"
     },
     addBtn: {
         background: "#00bcd4",
-        height: 40
+        height: 40,
+        fontSize: 17,
+        fontFamily:"serif"
     },
     listHead: {
-        fontSize: 15,
         fontWeight: 700,
-        paddingLeft: 15
+        paddingLeft: 15,
+        fontSize: 18,
+        fontFamily:"serif"
     },
     listItem: {
-        fontSize: 12,
+        fontSize: 15,
+        fontFamily:"serif",
         fontWeight: 400,
         borderStyle: "solid",
         borderWidth: 1,
@@ -133,11 +140,11 @@ function Vote(props) {
                 >
                     <Grid item style={{textAlign: "center", display: "flex"}}>
                         <Typography className={classes.head}>Vote </Typography>
-
                         <div style={{marginTop: -18,marginLeft:20}}>
                             {loading && <ReactLoading type="bars" color="#00bcd4" height={20}/>}
                         </div>
                     </Grid>
+                    <div style={{backgroundColor:"lightgray",height:1,width:"100%",margin:10}}/>
                     <Grid
                         item
                         container
@@ -146,8 +153,10 @@ function Vote(props) {
                         alignItems="center"
                     >
                         <Grid item>
+
                             <Grid item style={{margin: 10}}>
                                 <TextField
+                                    variant="outlined"
                                     value={voterName}
                                     label="Enter Voter Name"
                                     type="text"
@@ -172,9 +181,7 @@ function Vote(props) {
                         </Grid>
 
                     </Grid>
-                    <Grid item style={{margin: 20}}>
-                        <Divider orientation="horizontal"/>
-                    </Grid>
+                    <div style={{backgroundColor:"lightgray",height:1,width:"100%",margin:10}}/>
                     <Grid item
                           container
                           direction="row"
@@ -187,32 +194,34 @@ function Vote(props) {
                                     onClick={handleSubmit}
                                     className={classes.addBtn}
                                     disabled={voterName === ""}
+                                    endIcon={<SaveIcon/>}
                                 >
                                     Submit
                                 </Button> :
                                 <Button
                                     onClick={handleFinalSubmit}
                                     className={classes.addBtn}
+                                    endIcon={<ArrowForwardIcon/>}
                                 >
                                     Go to Results
                                 </Button>}
                         </Grid>
 
                         {Object.keys(votes).length < voterCount && <Grid item>
-                            <Typography style={{color: "red"}}>
+                            <Typography style={{color: "red", fontSize: 18,
+                                fontFamily:"serif"}}>
                                 {voterName === "" ? "Enter Voter Name" : ""}
                             </Typography>
                         </Grid>}
                         <Grid item>
-                            <Typography style={{color: "red"}}>
+                            <Typography style={{color: "red", fontSize: 18,
+                                fontFamily:"serif"}}>
                                 {Object.keys(votes).length < voterCount ? `${voterCount - Object.keys(votes).length} Votes Remain` : "Voters Count Reached"}
                             </Typography>
                         </Grid>
 
                     </Grid>
-                    <Grid item style={{margin: 20}}>
-                        <Divider orientation="horizontal"/>
-                    </Grid>
+
                     <Grid item>
                         <div style={{display: "flex", marginTop: 20,width:700,overflowX:"auto"}}>
                             {Object.keys(votes).map(v => {
