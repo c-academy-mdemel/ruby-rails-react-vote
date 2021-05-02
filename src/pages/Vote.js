@@ -6,7 +6,7 @@ import {
     ListItemText, Divider
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import {getData, getDataDummy} from "../util/api";
+import {getData} from "../util/api";
 import MatrixWrapper from "../components/MatrixWrapper";
 import ReactLoading from 'react-loading';
 import {useHistory} from "react-router-dom";

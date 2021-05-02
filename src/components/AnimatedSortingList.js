@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useTransition, animated} from "react-spring";
-import Grid from "@material-ui/core/Grid";
 import {Button, Paper, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
