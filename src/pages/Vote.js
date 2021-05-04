@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily:"serif"
     },
     addBtn: {
-        background: "#00bcd4",
+        backgroundColor: "#ef9a9a",
         height: 40,
         fontSize: 17,
         fontFamily:"serif"
@@ -141,7 +141,7 @@ function Vote(props) {
                     <Grid item style={{textAlign: "center", display: "flex"}}>
                         <Typography className={classes.head}>Vote </Typography>
                         <div style={{marginTop: -18,marginLeft:20}}>
-                            {loading && <ReactLoading type="bars" color="#00bcd4" height={20}/>}
+                            {loading && <ReactLoading type="bars" color="#ef9a9a" height={20}/>}
                         </div>
                     </Grid>
                     <div style={{backgroundColor:"lightgray",height:1,width:"100%",margin:10}}/>

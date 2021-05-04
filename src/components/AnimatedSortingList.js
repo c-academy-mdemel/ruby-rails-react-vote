@@ -6,7 +6,7 @@ import CachedIcon from '@material-ui/icons/Cached';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: "flex"
+        display: "block",
     },
     btnWrapper: {
         display: "grid",
@@ -15,18 +15,20 @@ const useStyles = makeStyles((theme) => ({
         placeItems: "center",
     },
     btn: {
-        background: "#00bcd4",
+        backgroundColor: "#ef9a9a",
         margin: 10,
         fontFamily:"serif",
         fontSize:15
     },
     cell: {
-       minWidth:100,
-        padding: 10,
+       width:150,
+        height:50,
+        padding: 4,
         borderStyle: "solid",
         borderWidth: 0.5,
         borderRadius: 0,
         borderColor: "lightgray",
+        overflow:"hidden"
 
     },
     row: {
@@ -55,13 +57,13 @@ function AnimatedSortingList({sorted, notSorted}) {
                 <Button className={classes.btn} startIcon={<CachedIcon/>} onClick={() => set(sorted)}>Sort</Button>
             </div>
 
-            <Paper elevation={5}>
+            <Paper elevation={1}>
                 {transitions.map(({item, props: {y, ...rest}, key}, index) => (
                     <animated.div
                         key={key}
                         style={{
                             transform: y.interpolate(y => `translate3d(0,${y}px,0)`),
-                            ...rest
+                            ...rest,
                         }}
                     >
                         <Paper className={classes.row}>

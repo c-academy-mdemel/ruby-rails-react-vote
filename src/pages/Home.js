@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "serif"
     },
     addBtn: {
-        background: "#00bcd4",
+        backgroundColor: "#ef9a9a",
         marginLeft: 10,
         height: 50,
         fontFamily: "serif",
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 5,
         borderColor: "beige",
         padding: 5,
-        width: 180,
+        width: 250,
         fontFamily: "serif"
     },
 }))
