@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
     },
     nxtBtn:{
-        background: "#00bcd4",
+        backgroundColor: "#ef9a9a",
         height: 40,
         fontFamily:"serif",
         fontSize:15

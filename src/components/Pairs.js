@@ -52,13 +52,13 @@ function Pairs(props) {
                     }
                 />
             </Grid>
-            <Grid item style={{marginLeft: 20, marginRight: 20}}>
+            <Grid item style={{marginLeft: 5, marginRight: 5}}>
                 <ArrowForwardIcon/>
             </Grid>
             <Grid item>
                 <ColorChangingMatrix data={lastMatrix} Y={pairs[currentIndex].loser} X={pairs[currentIndex].winner}/>
             </Grid>
-            <Grid item style={{marginLeft: 20, marginRight: 20}}>
+            <Grid item style={{marginLeft: 5, marginRight: 5}}>
                 <ArrowForwardIcon/>
             </Grid>
         </Grid>

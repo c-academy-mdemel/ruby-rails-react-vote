@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: "serif"
     },
     addBtn: {
-        background: "#00bcd4",
+        backgroundColor: "#ef9a9a",
         height: 40,
         fontSize: 17,
         fontFamily: "serif"

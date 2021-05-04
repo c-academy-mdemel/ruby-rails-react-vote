@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
     },
     nxtBtn:{
-        background: "#00bcd4",
+        marginLeft:10,
+        backgroundColor: "#ef9a9a",
         height: 40,
         fontFamily:"serif",
         fontSize:15
@@ -66,6 +67,13 @@ function Algo(props) {
                             }}
                             startIcon={<PlayArrowIcon/>}
                         >Replay</Button>
+                        <Button
+                            className={classes.nxtBtn}
+                            onClick={() => {
+                                history.push("/last");
+                            }}
+                            endIcon={<ArrowForwardIcon/>}
+                        >Next</Button>
                     </Grid>
                     <div style={{backgroundColor:"lightgray",height:1,width:"100%",margin:5}}/>
                     <Grid item container
@@ -77,7 +85,7 @@ function Algo(props) {
                             <Typography className={classes.title}>Pairs (Step 1)</Typography>
                             <Pairs/>
                         </Grid>
-                        <Grid item>
+                        <Grid item style={{}}>
                             <Typography className={classes.title}>Sorted (Step 2)</Typography>
                             <Sorted/>
                         </Grid>
@@ -91,15 +99,7 @@ function Algo(props) {
                             <Typography className={classes.title}>Arrow Lock (Step 3)</Typography>
                             <Arrow/>
                         </Grid>
-                        <Grid item>
-                            <Button
-                                className={classes.nxtBtn}
-                            onClick={() => {
-                                history.push("/last");
-                            }}
-                            endIcon={<ArrowForwardIcon/>}
-                        >Next</Button>
-                        </Grid>
+
                     </Grid>
 
 
