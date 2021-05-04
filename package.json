@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "array-move": "^3.0.1",
     "axios": "^0.21.1",
     "gojs": "^2.1.38",
     "gojs-react": "^1.0.10",
@@ -22,7 +23,11 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-sortable-dnd-list": "^1.0.1",
+<<<<<<< HEAD
     "react-splash": "^0.1.0",
+=======
+    "react-sortable-hoc": "^2.0.0",
+>>>>>>> e272fa6d4a4f6d113f7c6b436b0c80d03bc3ebf8
     "react-spring": "8.0.25",
     "styled-components": "^5.2.3",
     "web-vitals": "^1.0.1"
@@ -50,5 +55,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

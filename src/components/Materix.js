@@ -33,7 +33,7 @@ function Materix({data}) {
                 </Table>
             </TableContainer></FadeIn> :
             <div style={{marginRight:50}}>
-               <ReactLoading type="bars" color="#00bcd4" height={20}/>
+               <ReactLoading type="bars"  color="#ef9a9a"  height={20}/>
             </div>
     );
 }

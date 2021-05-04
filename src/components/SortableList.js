@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 5,
         borderColor: "beige",
         padding: 5,
-        width: 180
+        width: 250,
+        cursor:"pointer"
     },
 }))
 
