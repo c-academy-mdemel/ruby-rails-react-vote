@@ -16,7 +16,6 @@ import SaveIcon from '@material-ui/icons/Save';
 import { sortableContainer, sortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
-
 const SortableItem = sortableElement(({ value }) => <li>{value}</li>);
 
 const SortableContainer = sortableContainer(({ children }) => {
